@@ -7,7 +7,9 @@ const Home = () => {
     isPending,
     error,
   } = useFetch("http://dsite.one/api/fetch.php");
-  console.log(blogs);
+
+  console.log(error);
+  console.log(isPending);
 
   return (
     <div className="home">

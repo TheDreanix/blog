@@ -4,10 +4,11 @@ import useFetch from "../hooks/useFetch";
 const BlogDetails = () => {
   const { id } = useParams();
   const {
-    data: blog,
+    data: blogs,
+    isPending,
     error,
-    IsPending,
-  } = useFetch("http://dsite.one/api/fetch.php/" + id);
+  } = useFetch("http://dsite.one/api/fetchId.php");
+  console.log(blogs);
   const history = useHistory();
 
   // Delets Blog on Button Press
@@ -21,13 +22,13 @@ const BlogDetails = () => {
 
   return (
     <div className="blog-details">
-      {IsPending && <div>Loading...</div>}
+      {isPending && <div>Loading...</div>}
       {error && <div>{error}</div>}
-      {blog && (
+      {blogs && (
         <article>
-          <h2>{blog.title}</h2>
-          <p>Written by {blog.author}</p>
-          <div>{blog.body}</div>
+          <h2>{blogs.title}</h2>
+          <p>Written by {blogs.author}</p>
+          <div>{blogs.body}</div>
           <div> {id} </div>
           <button onClick={handleClick}>Delete Blog</button>
         </article>

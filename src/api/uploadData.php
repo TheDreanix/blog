@@ -1,24 +1,25 @@
 <?php
 
-$title = $_POST["title"];
-$body = $_POST["body"];
-$author = $_POST["author"];
+    
+$data = json_decode(file_get_contents('php://input'), true);
 
-$host = "localhost";
-$dbname = "blogs_db";
-$username = "blogs_admin";
-$password = "S1QR7Y4DXbmdi36u";
+foreach( $data as $key => $value ){
+    ${$key . $i} = $value;
+    ${$i . '_' . $key} = $value;
+}
+
+$server = "sql208.your-server.de";
+$user = "blogs_admin";
+$pass = "S1QR7Y4DXbmdi36u";
+$db = "blogs_db";
         
-$conn = mysqli_connect(hostname: $host,
-                       username: $username,
-                       password: $password,
-                       database: $dbname);
+$conn = mysqli_connect($server, $user, $pass, $db);
         
 if (mysqli_connect_errno()) {
     die("Connection error: " . mysqli_connect_error());
 }           
         
-$sql = "INSERT INTO blog (title, body, author)
+$sql = "INSERT INTO blogs (title, body, author)
         VALUES (?, ?, ?)";
 
 $stmt = mysqli_stmt_init($conn);
@@ -34,3 +35,4 @@ mysqli_stmt_bind_param($stmt, "sss",
                        $author);
 
 mysqli_stmt_execute($stmt);
+?>
