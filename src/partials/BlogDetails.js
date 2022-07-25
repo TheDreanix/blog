@@ -2,34 +2,41 @@ import { useHistory, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
 const BlogDetails = () => {
-  const { id } = useParams();
   const {
-    data: blogs,
+    data: blog,
     isPending,
     error,
   } = useFetch("http://dsite.one/api/fetchId.php");
-  console.log(blogs);
   const history = useHistory();
 
   // Delets Blog on Button Press
   const handleClick = () => {
-    fetch("http://dsite.one/api/fetch.php/uploadData" + id, {
-      method: "DELETE",
-    }).then(() => {
+    fetch("http://dsite.one/api/deleteData.php")
+    .then(() => {
       history.push("/");
     });
   };
+
+
+  let title = "";
+  let body = "";
+  let author  = "";
+
+  if( typeof blog === 'object' && blog !== null){
+    title = blog[0].title;
+    body = blog[0].body;
+    author = blog[0].author;
+  }
 
   return (
     <div className="blog-details">
       {isPending && <div>Loading...</div>}
       {error && <div>{error}</div>}
-      {blogs && (
+      {blog && (
         <article>
-          <h2>{blogs.title}</h2>
-          <p>Written by {blogs.author}</p>
-          <div>{blogs.body}</div>
-          <div> {id} </div>
+          <h2>{title}</h2>
+          <div>{body}</div>
+          <p>Written by {author}</p>
           <button onClick={handleClick}>Delete Blog</button>
         </article>
       )}
