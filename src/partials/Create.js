@@ -13,7 +13,7 @@ const Create = () => {
     const blog = { title, body, author };
     setIsPending(true);
 
-    fetch("http://dsite.one/api/uploadData.php", {
+    fetch("https://dsite.one/api/uploadData.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),

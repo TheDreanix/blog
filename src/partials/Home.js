@@ -6,7 +6,7 @@ const Home = () => {
     data: blogs,
     isPending,
     error,
-  } = useFetch("http://dsite.one/api/fetch.php");
+  } = useFetch("https://dsite.one/api/fetch.php");
 
   return (
     <div className="home">

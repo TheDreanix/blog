@@ -6,23 +6,21 @@ const BlogDetails = () => {
     data: blog,
     isPending,
     error,
-  } = useFetch("http://dsite.one/api/fetchId.php");
+  } = useFetch("https://dsite.one/api/fetchId.php");
   const history = useHistory();
 
   // Delets Blog on Button Press
   const handleClick = () => {
-    fetch("http://dsite.one/api/deleteData.php")
-    .then(() => {
+    fetch("https://dsite.one/api/deleteData.php").then(() => {
       history.push("/");
     });
   };
 
-
   let title = "";
   let body = "";
-  let author  = "";
+  let author = "";
 
-  if( typeof blog === 'object' && blog !== null){
+  if (typeof blog === "object" && blog !== null) {
     title = blog[0].title;
     body = blog[0].body;
     author = blog[0].author;
